@@ -2,30 +2,24 @@
 #include <string>
 using namespace std;
 
-// ── How many accounts we can store ──
 #define MAX_ACCOUNTS 100
 
-// ── Account data stored in simple arrays ──
 int accountNumber[MAX_ACCOUNTS];
 string accountName[MAX_ACCOUNTS];
-string accountType[MAX_ACCOUNTS]; // "Savings" or "Checking"
+string accountType[MAX_ACCOUNTS];
 string accountPin[MAX_ACCOUNTS];
 double accountBalance[MAX_ACCOUNTS];
 bool accountActive[MAX_ACCOUNTS];
 int totalAccounts = 0;
 int nextAccountNumber = 1001;
 
-// Admin password
 string ADMIN_PIN = "admin123";
 
-// ── Print a line of dashes ──
 void printLine()
 {
     cout << "-----------------------------------------------" << endl;
 }
 
-// ── Find which index belongs to an account number ──
-// Returns -1 if not found
 int findAccount(int accNo)
 {
     for (int i = 0; i < totalAccounts; i++)
@@ -38,7 +32,6 @@ int findAccount(int accNo)
     return -1;
 }
 
-// ── Create a new account ──
 void createAccount()
 {
     if (totalAccounts >= MAX_ACCOUNTS)
@@ -95,7 +88,6 @@ void createAccount()
         return;
     }
 
-    // Save the account
     int i = totalAccounts;
     accountNumber[i] = nextAccountNumber;
     accountName[i] = name;
@@ -112,7 +104,6 @@ void createAccount()
     nextAccountNumber++;
 }
 
-// ── Deposit money ──
 void depositMoney(int index)
 {
     double amount;
@@ -130,7 +121,6 @@ void depositMoney(int index)
     cout << "New Balance : Rs. " << accountBalance[index] << endl;
 }
 
-// ── Withdraw money ──
 void withdrawMoney(int index)
 {
     double amount;
@@ -154,7 +144,6 @@ void withdrawMoney(int index)
     cout << "New Balance : Rs. " << accountBalance[index] << endl;
 }
 
-// ── Transfer money to another account ──
 void transferMoney(int fromIndex)
 {
     int toAccNo;
@@ -206,7 +195,6 @@ void transferMoney(int fromIndex)
     cout << "Your new balance : Rs. " << accountBalance[fromIndex] << endl;
 }
 
-// ── Show account details ──
 void showDetails(int index)
 {
     printLine();
@@ -220,7 +208,6 @@ void showDetails(int index)
     printLine();
 }
 
-// ── Change PIN ──
 void changePin(int index)
 {
     string oldPin, newPin, confirm;
@@ -249,7 +236,6 @@ void changePin(int index)
     cout << "PIN changed successfully!" << endl;
 }
 
-// ── Account menu after login ──
 void accountMenu(int index)
 {
     int choice;
@@ -303,7 +289,6 @@ void accountMenu(int index)
     } while (choice != 0);
 }
 
-// ── Login ──
 void login()
 {
     int accNo;
@@ -337,7 +322,6 @@ void login()
     accountMenu(index);
 }
 
-// ── Admin: list all accounts ──
 void listAllAccounts()
 {
     if (totalAccounts == 0)
@@ -362,7 +346,6 @@ void listAllAccounts()
     printLine();
 }
 
-// ── Admin: search one account ──
 void searchAccount()
 {
     int accNo;
@@ -379,7 +362,6 @@ void searchAccount()
     showDetails(index);
 }
 
-// ── Admin: close an account ──
 void closeAccount()
 {
     int accNo;
@@ -397,7 +379,6 @@ void closeAccount()
     cout << "Account " << accNo << " has been closed." << endl;
 }
 
-// ── Admin: show bank summary ──
 void bankSummary()
 {
     int activeCount = 0;
@@ -421,7 +402,6 @@ void bankSummary()
     printLine();
 }
 
-// ── Admin menu ──
 void adminMenu()
 {
     string pin;
@@ -479,7 +459,6 @@ void adminMenu()
     } while (choice != 0);
 }
 
-// ── Main function ──
 int main()
 {
     int choice;
